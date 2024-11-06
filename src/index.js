@@ -89,21 +89,21 @@ event.preventDefault()
 // console.log(topMenuLinks.length);
 // console.log(event.target.textContent);  // Log the content of the <a> to verify the handler is working.
 } 
+}
 document.addEventListener('DOMContentLoaded', () => {
-  for(i=0; i<topMenuLinks.length; i++){
-    const clicked = topMenuLinks[i];
-      // console.log(topMenuLinks[i]);
-    clicked.addEventListener('click', function(){
-      menuLinks = topMenuLinks;
-      for (i=0; i<topMenuLinks.length; i++){
-        menuLinks[i].classList.remove('active');
-      }
-      this.classList.toggle('active');
+  for (let i =0; i < topMenuLinks.length; i++){
+    const clicked = topMenuLinks[i]
+    clicked.addEventListener("click", function(){
+        
+        menuLinks = document.querySelectorAll("a");
+        for (i = 0; i < menuLinks.length; i++) {
+            menuLinks[i].classList.remove("active");
+        }
+
+        this.classList.add("active");
   })
 }
 });
-
-}
 
 //==================Old Code ========================
  /* for (let i =0; i < topMenuLinks.length; i++){
