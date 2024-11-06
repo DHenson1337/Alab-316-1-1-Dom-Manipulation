@@ -26,7 +26,9 @@
     background-color: var(--sub-menu-bg);
     color: var(--main-bg);
   }
-
+main {
+  height: 100vh;
+}
 
   body {
     font-family: Tahoma, Geneva, sans-serif;
