@@ -79,7 +79,9 @@ topMenuEl.addEventListener('click',aHandler)
 
 // The first line of code of the event listener function should call the event object's preventDefault() method.
 function aHandler(event){
-    
+ 
+  
+  
 if (event.target.localName !== 'a'){
     return; // The second line of code of the function should immediately return if the element clicked was not an <a> element.
 
@@ -90,20 +92,130 @@ event.preventDefault()
 // console.log(event.target.textContent);  // Log the content of the <a> to verify the handler is working.
 } 
 }
+
+
+
+
 document.addEventListener('DOMContentLoaded', () => {
+ 
   for (let i =0; i < topMenuLinks.length; i++){
     const clicked = topMenuLinks[i]
+     console.log(clicked);
+
+    clicked.addEventListener("click", function(e){
+        if(!e.target.matches('a'))return
+        //e.target targets a tag
+        console.log(e.target);
+        e.target.classList.toggle('active') //Toggle
+        topMenuLinks.forEach(link=>{
+          console.log(link.subLinks);
+          if(link!==e.target){
+             link.classList.remove('active')
+          }
+          const clickedLink = menuLinks.find((link)=>link.text==e.target.textContent)
+          console.log(clickedLink.subLinks);
+          if(e.target.classList.contains('active')&& e.target.innerHTML!== "about"){
+            subMenuEl.style.top="100%"
+            buildSubMenu(clickedLink.subLinks)
+          }else{
+            subMenuEl.style.top="0%"
+          }
+        })
+          function buildSubMenu(subLinks){
+            console.log(subLinks);
+            // const subMenuEl = document.querySelectorAll("sub-menu")
+            console.log(subMenuEl);
+            subMenuEl.innerHTML =""
+            subLinks.forEach(link=>{
+              const a = document.createElement('a')
+              a.setAttribute('href', link.href)
+              a.textContent= link.text
+              subMenuEl.appendChild(a)
+            })
+          }
+          subMenuEl.addEventListener("click", function(e){
+            e.preventDefault()
+            if(!e.target.matches('a')){
+              return;
+            } 
+            console.log(e.target);
+            subMenuEl.style.top ="0%"
+            topMenuLinks.forEach(link=>{
+              link.classList.remove('active')
+            })
+            h1.textContent =`${e.target.textContent}`
+          })
+        /* menuLinks = document.querySelectorAll("a");
+                this.classList.add("active");
+         menuLinks.forEach(link =>{
+          if(link !== e.target){
+            link.classList.remove("active")
+            // console.log(link.class);
+            console.log(link);
+          } else if(link === e.target && link.classList == "active"){
+              link.classList.remove('active')
+          }
+         })
+ */
+         
+        
+        console.log(this);
+        
+  })
+}
+  
+});
+ 
+
+/*
+ 
+*/
+
+
+/*================Old Loop======== 
     clicked.addEventListener("click", function(){
         
         menuLinks = document.querySelectorAll("a");
         for (i = 0; i < menuLinks.length; i++) {
             menuLinks[i].classList.remove("active");
-        }
 
+          
+        }
+        
         this.classList.add("active");
+        console.log(this);
+        
   })
 }
 });
+
+*/
+
+
+
+
+/* Previous Loop:
+ for (let i =0; i < topMenuLinks.length; i++){
+    const clicked = topMenuLinks[i]
+     
+    clicked.addEventListener("click", function(){
+        
+        menuLinks = document.querySelectorAll("a");
+        for (i = 0; i < menuLinks.length; i++) {
+            menuLinks[i].classList.remove("active");
+            
+            
+            
+        }
+        
+        this.classList.add("active");
+  })
+}
+
+*/
+
+
+
 
 //==================Old Code ========================
  /* for (let i =0; i < topMenuLinks.length; i++){
